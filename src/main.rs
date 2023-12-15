@@ -1,3 +1,6 @@
+mod algorithm;
+mod generator;
+
 use yew::prelude::*;
 
 #[function_component(App)]
