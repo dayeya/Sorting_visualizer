@@ -1,12 +1,13 @@
+use yew::prelude::*;
 mod algorithm;
 mod generator;
 
-use yew::prelude::*;
+use crate::generator::generator::generate_array;
 
 #[function_component(App)]
 fn app() -> Html {
     html! {
-        <h1>{ "Hello World" }</h1>
+        <h1>{ "Sorting visualizer" }</h1>
     }
 }
 
