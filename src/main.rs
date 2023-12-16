@@ -56,9 +56,8 @@ impl Component for App {
     fn update(&mut self, ctx: &Context<Self>, action: Self::Message) -> bool {
         match action {
             Msg::Start => {
-                // Implement your sorting logic or any other action here
-                true // Indicate that the update was handled successfully
-            } // Indicate that the update was not handled
+                true
+            }
         }
     }
 
