@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.cell {
+    display: inline-block;
+    background-color: black;
+}
+
+.header {
+    width: 100vw;
+    background-color: cornflowerblue;
+}
+
+.header > h1 {
+    color: black;
+}
+
+.settings_config {
+    width: 100vw;
+    background-color: cornflowerblue;
+}
+
+.settings_config > button {
+    color: black;
+}
