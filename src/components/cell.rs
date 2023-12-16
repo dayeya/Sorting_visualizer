@@ -1,27 +1,45 @@
 use yew::prelude::*;
+use std::cmp::Ordering;
+use wasm_bindgen::prelude::*;
 
+#[derive(PartialOrd, PartialEq, Clone, Debug)]
 pub struct Cell {
-    pub width: u32,
-    pub height: u32,
+    pub width: i32,
+    pub height: i32,
     pub color: String
 }
 
-impl Cell {
-    pub fn new(w: u32, h:u32, c: String) -> Cell {
-        return Cell {
-            width: 10,
-            height: h,
-            color: c
-        }
+#[derive(Properties, PartialEq, Clone)]
+pub struct Array {
+    pub array: Vec<Cell>
+}
+
+impl Array {
+    pub fn from_vec(array: Vec<i32>) -> Array {
+        let converted: Vec<Cell> = array.iter().map(
+            |n: &i32| {
+                Cell {
+                    width: 20,
+                    height: *n,
+                    color: String::from("black")
+                }
+            }
+        ).collect();
+
+        // return final struct.
+        Array {array: converted}
+    }
+    pub fn wait() -> Option<String> {
+        // stops the main thread for a certain amount of time.
+        Some(String::from("Hello, world!"))
     }
 }
 
-pub struct Cells {
-    pub cells: Vec<Cell>
-}
+impl IntoIterator for Array {
+    type Item = Cell;
+    type IntoIter = std::vec::IntoIter<Cell>;
 
-impl Cells {
-    pub fn from_vec() -> Cells {
-        todo!()
+    fn into_iter(self) -> Self::IntoIter {
+        self.array.into_iter()
     }
 }
