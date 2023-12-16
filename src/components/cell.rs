@@ -19,8 +19,8 @@ impl Array {
         let converted: Vec<Cell> = array.iter().map(
             |n: &i32| {
                 Cell {
-                    width: 20,
-                    height: *n,
+                    width: 50,
+                    height: *n * 10,
                     color: String::from("black")
                 }
             }

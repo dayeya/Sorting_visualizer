@@ -6,6 +6,10 @@ use yew::prelude::*;
 use crate::components::cell::{Cell, Array};
 use crate::generator::array_generator::generate_array;
 
+pub enum Msg {
+    Start,
+}
+
 pub struct App {
     len: u32,
     min: i32,
@@ -21,18 +25,20 @@ impl App {
     fn view_cell(&self, idx: usize, cell: &Cell) -> Html {
         html! {
             <div key={idx} class={classes!("cell")}
-                style={format!("width: {}; height: {}; background-color: {};", cell.width, cell.height, cell.color)}>
+                style={
+                    format!("width: {}px; height: {}px;", cell.width, cell.height)
+                }>
             </div>
         }
     }
 }
 
 impl Component for App {
-    type Message = ();
+    type Message = Msg;
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
-        let (len, min, max): (u32, i32, i32) = (20, 1, 50);
+        let (len, min, max): (u32, i32, i32) = (20, 10, 50);
         let generated_vector: Vec<i32> = generate_array(len, min, max);
         let arr: Array = Array::from_vec(generated_vector);
         Self {
@@ -47,13 +53,27 @@ impl Component for App {
         }
     }
 
+    fn update(&mut self, ctx: &Context<Self>, action: Self::Message) -> bool {
+        match action {
+            Msg::Start => {
+                // Implement your sorting logic or any other action here
+                true // Indicate that the update was handled successfully
+            } // Indicate that the update was not handled
+        }
+    }
+
     fn view(&self, ctx: &Context<Self>) -> Html {
         let array_view = self.collection.clone()
             .into_iter()
             .enumerate().map(|(idx, cell)| self.view_cell(idx, &cell));
         html! {
-            <div>
+           <div class={classes!("container")}>
+                <div class={classes!("header")}><h1>{"Sorting visualizer"}</h1></div>
+                // Add the array.
                 { for array_view }
+                <div class={classes!("settings_config")}>
+                    <button class="sort_button" onclick={ctx.link().callback(|_| Msg::Start)}>{ "Start" }</button>
+                </div>
             </div>
         }
     }
