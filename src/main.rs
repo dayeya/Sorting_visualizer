@@ -19,7 +19,7 @@ pub struct App {
     max: i32,
     sorted: bool,
     collection: Array,
-    swap_time: i32,
+    swap_time: i32
 }
 
 impl App {
@@ -42,7 +42,7 @@ impl Component for App {
 
     fn create(_ctx: &Context<Self>) -> Self {
         let len: u32 = 50;
-        let (min_element, max_element): (i32, i32) = (1, 75);
+        let (min_element, max_element): (i32, i32) = (1, 50);
         let generated_vector: Vec<i32> = generate_array(len, min_element, max_element);
         let arr: Array = Array::from_vec(generated_vector);
 
@@ -82,7 +82,7 @@ impl Component for App {
                         <h1>{"Sorting visualizer"}</h1>
                     </div>
                     <div class={classes!("settings_config")}>
-                        <button class={classes!("sort_button")} onclick={ctx.link().callback(Msg::Start)}>{ "Start" }</button>
+                        <button class={classes!("sort_button")} onclick={ctx.link().callback(|_| Msg::Start)}>{ "Start" }</button>
                     </div>
                 </div>
                 // Add the array.

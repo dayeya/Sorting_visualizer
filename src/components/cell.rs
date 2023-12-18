@@ -1,6 +1,8 @@
 use yew::prelude::*;
 use wasm_bindgen::prelude::*;
 use std::ops::{Index, IndexMut};
+use std::thread;
+use std::time::Duration;
 
 #[derive(PartialOrd, PartialEq, Clone, Debug)]
 pub struct Cell {
@@ -32,11 +34,6 @@ impl Array {
 
     pub fn len(&self) -> usize {
         self.array.len()
-    }
-
-    pub fn wait() -> Option<String> {
-        // stops the main thread for a certain amount of time.
-        Some(String::from("Hello, world!"))
     }
 }
 
