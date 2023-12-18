@@ -9,5 +9,5 @@ git clone https://github.com/dayeya/sorting_visualizer.git
 Then do:
 ```bash
 cd sorting-visualizer
-./run.ps1
+trunk serve --open
 ```
