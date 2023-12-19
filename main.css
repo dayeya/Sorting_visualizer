@@ -13,9 +13,13 @@ body {
 .cell {
     color: #2b61d4;
     background-color: white;
+    padding-inline: 5px;
     font-size: 0.8em;
     font-weight: bold;
     font-family: "JetBrains Mono", monospace;
+    border-inline: 2px solid black;
+    border-inline-width: 1px;
+
 
     display: inline-flex;
     justify-content: center;

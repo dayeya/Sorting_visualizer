@@ -6,7 +6,6 @@ use std::time::Duration;
 
 #[derive(PartialOrd, PartialEq, Clone, Debug)]
 pub struct Cell {
-    pub width: i32,
     pub height: i32,
 }
 
@@ -19,8 +18,7 @@ impl Array {
     pub fn from_vec(array: Vec<i32>) -> Array {
         let converted: Vec<Cell> = array.iter().map(|n: &i32| {
             Cell {
-                width: 30,
-                height: *n * 10,
+                height: *n,
             }
         }).collect();
 

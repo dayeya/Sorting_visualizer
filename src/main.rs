@@ -10,7 +10,7 @@ use crate::generator::array_generator::generate_array;
 
 pub enum Msg {
     Start,
-    Swapped, // Used to update the array.
+    Update, // Used to update the array.
 }
 
 pub struct App {
@@ -18,19 +18,21 @@ pub struct App {
     min: i32,
     max: i32,
     sorted: bool,
+    swap_time: i32,
     collection: Array,
-    swap_time: i32
 }
 
 impl App {
     fn view_cell(&self, idx: usize, cell: &Cell) -> Html {
+        let adjusted_height = match cell.height {
+            10 => cell.height + 5,
+            _ => cell.height
+        };
         html! {
-            <div key={idx} class={classes!("cell")}
+            <div key={idx} id={format!("{}", idx)} class={classes!("cell")}
                 style={
-                    format!("width: {}px; height: {}px;", cell.width, cell.height)
+                    format!("height: {}px;", adjusted_height)
                 }>
-            // Cell data.
-            { cell.height / 10 }
             </div>
         }
     }
@@ -42,7 +44,7 @@ impl Component for App {
 
     fn create(_ctx: &Context<Self>) -> Self {
         let len: u32 = 50;
-        let (min_element, max_element): (i32, i32) = (1, 50);
+        let (min_element, max_element): (i32, i32) = (1, 200);
         let generated_vector: Vec<i32> = generate_array(len, min_element, max_element);
         let arr: Array = Array::from_vec(generated_vector);
 
@@ -61,10 +63,10 @@ impl Component for App {
             Msg::Start => {
                 insertion_sort(
                     &mut self.collection,
-                    ctx.link().callback(Box::new(|_| Msg::Swapped)));
+                    ctx.link().callback(Box::new(|_| Msg::Update)));
                 true
             }
-            Msg::Swapped => {
+            Msg::Update => {
                 // rerender the array.
                 true
             }
